@@ -505,17 +505,17 @@
         "id": "c5dce8d0.c87108",
         "type": "ioBroker in",
         "z": "dfbb214a.89a8b",
-        "name": "Temperatur",
+        "name": "Temp",
         "topic": "sonoff.0.door_office.AM2301_Temperature",
         "payloadType": "value",
         "onlyack": "",
         "func": "all",
         "gap": "",
-        "x": 130,
-        "y": 960,
+        "x": 110,
+        "y": 920,
         "wires": [
             [
-                "8ab169e9.53af48"
+                "65455d5.e6db3a4"
             ]
         ]
     },
@@ -527,7 +527,7 @@
         "func": "msg.temp = msg.payload\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
+        "x": 357,
         "y": 960,
         "wires": [
             [
@@ -543,7 +543,7 @@
         "topic": "sonoff.0.door_office.AM2301_Humidity",
         "attrname": "payload",
         "payloadType": "value",
-        "x": 420,
+        "x": 507,
         "y": 960,
         "wires": [
             [
@@ -559,7 +559,7 @@
         "func": "text =  \"[z][s2l1c1]Temp:\" + msg.temp + \"C\"\ntext += \"[s2l3c1]Hum: \" + msg.hum + \"%\" \ntext += \"[s1l8c1]LUX:\" + msg.lux + \" / \"\ntext += \"Door:\" + msg.payload\n\nmsg.payload = text\n// [z][s2l1c1]Temp: 25.3C [s2l3c1]Hum:  48.3%\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1070,
+        "x": 1157,
         "y": 960,
         "wires": [
             [
@@ -575,7 +575,7 @@
         "topic": "sonoff.0.door_office.DisplayText",
         "ack": "false",
         "autoCreate": "false",
-        "x": 1270,
+        "x": 1310,
         "y": 960,
         "wires": []
     },
@@ -607,7 +607,7 @@
         "topic": "mihome.0.devices.gateway_7811dc64e4d4.illumination",
         "attrname": "payload",
         "payloadType": "value",
-        "x": 700,
+        "x": 787,
         "y": 960,
         "wires": [
             [
@@ -623,7 +623,7 @@
         "func": "msg.hum = msg.payload\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 570,
+        "x": 657,
         "y": 960,
         "wires": [
             [
@@ -639,7 +639,7 @@
         "topic": "sonoff.0.door_office.POWER2",
         "attrname": "payload",
         "payloadType": "value",
-        "x": 950,
+        "x": 1037,
         "y": 960,
         "wires": [
             [
@@ -655,11 +655,45 @@
         "func": "msg.lux = msg.payload\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 830,
+        "x": 917,
         "y": 960,
         "wires": [
             [
                 "6dba2865.80b9e8"
+            ]
+        ]
+    },
+    {
+        "id": "65455d5.e6db3a4",
+        "type": "ioBroker get",
+        "z": "dfbb214a.89a8b",
+        "name": "Temp",
+        "topic": "sonoff.0.door_office.AM2301_Temperature",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 230,
+        "y": 960,
+        "wires": [
+            [
+                "8ab169e9.53af48"
+            ]
+        ]
+    },
+    {
+        "id": "65add629.9cc088",
+        "type": "ioBroker in",
+        "z": "dfbb214a.89a8b",
+        "name": "Door",
+        "topic": "sonoff.0.door_office.POWER2",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 110,
+        "y": 1000,
+        "wires": [
+            [
+                "65455d5.e6db3a4"
             ]
         ]
     },
