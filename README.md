@@ -1,5 +1,15 @@
 # ESP8266-DoorSensor
-ESP8266 Tasmota Door Sensor System
+
+This is a simple Door/Windows open/close sensor (Reedsensor) with a temperature/humity sensor (DHT22) and a display (SSD1306) that shows the Temperature and the Humity.
+
+The os in the esp8266 is Tasmota.
+
+
+## Schema
+![Image of Fritzing](https://github.com/swissglider/ESP8266-DoorSensor/blob/master/fritzing/ESP8266-DoorSensor.png?raw=true)
+
+## Configuration on Tasmota:
+![Image of Tasmota](https://github.com/swissglider/ESP8266-DoorSensor/blob/master/picture/Office-Door_Configuration.png?raw=true)
 
 ## Set OLED Display for SSD1306 on tasmota on the console
 Check if Display available:
