@@ -1,0 +1,692 @@
+[
+    {
+        "id": "c79cbe39.89368",
+        "type": "ioBroker in",
+        "z": "dfbb214a.89a8b",
+        "name": "Büro Luftfeuchtigkeit",
+        "topic": "sonoff.0.door_office.AM2301_Humidity",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "e5f51a36.c4bd68"
+            ]
+        ]
+    },
+    {
+        "id": "c2dd403f.2b24",
+        "type": "ioBroker in",
+        "z": "dfbb214a.89a8b",
+        "name": "Büro Temperatur",
+        "topic": "sonoff.0.door_office.AM2301_Temperature",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "531ac5d.2dddc3c"
+            ]
+        ]
+    },
+    {
+        "id": "307d186b.494cd8",
+        "type": "ioBroker in",
+        "z": "dfbb214a.89a8b",
+        "name": "Büro Door",
+        "topic": "sonoff.0.door_office.POWER2",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 120,
+        "y": 640,
+        "wires": [
+            [
+                "cedd2479.2b2db8",
+                "db9b17e4.973688"
+            ]
+        ]
+    },
+    {
+        "id": "cedd2479.2b2db8",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "Door Status",
+        "func": "msg.payload = msg.payload === \"true\"\nif(msg.payload){\n    node.status({text:'open'});\n}else {\n    node.status({text:'close'});\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 640,
+        "wires": [
+            [
+                "6b5caf17.c5758",
+                "1ee4e7a8.127ba8"
+            ]
+        ]
+    },
+    {
+        "id": "e5f51a36.c4bd68",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "Luftfeuchtigkeit",
+        "func": "msg.payload = parseInt(msg.payload)\nnode.status({text:msg.payload + ' %'});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 360,
+        "y": 220,
+        "wires": [
+            [
+                "15a756f8.7f1dc9",
+                "f578eaff.767828"
+            ]
+        ]
+    },
+    {
+        "id": "531ac5d.2dddc3c",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "Temperatur",
+        "func": "msg.payload = parseInt(msg.payload)\nnode.status({text:msg.payload + ' °C'});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 320,
+        "wires": [
+            [
+                "9f6a01c3.8424b",
+                "e8afbebb.2af55"
+            ]
+        ]
+    },
+    {
+        "id": "6b5caf17.c5758",
+        "type": "ui_switch",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "label": "Reed",
+        "group": "47d99fbc.6877",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 590,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "15a756f8.7f1dc9",
+        "type": "ui_gauge",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "group": "47d99fbc.6877",
+        "order": 3,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Luftfeuchtigkeit",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ca3838",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "40",
+        "seg2": "55",
+        "x": 620,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9f6a01c3.8424b",
+        "type": "ui_gauge",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "group": "47d99fbc.6877",
+        "order": 4,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Temperatur",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "50",
+        "colors": [
+            "#002ab5",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "19",
+        "seg2": "25",
+        "x": 610,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f578eaff.767828",
+        "type": "ui_chart",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "group": "47d99fbc.6877",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "label": "Luftfeuchtigkeit",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 620,
+        "y": 240,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e8afbebb.2af55",
+        "type": "ui_chart",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "group": "47d99fbc.6877",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "label": "Temperatur",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "10",
+        "ymax": "35",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 610,
+        "y": 340,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1ee4e7a8.127ba8",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "func": "if(msg.payload){\n    msg.payload = 1\n} else {\n    msg.payload = 0\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 620,
+        "wires": [
+            [
+                "306e138d.19f54c"
+            ]
+        ]
+    },
+    {
+        "id": "306e138d.19f54c",
+        "type": "ui_chart",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "group": "47d99fbc.6877",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "label": "Reed",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 590,
+        "y": 620,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "19cc786f.736998",
+        "type": "hue-light",
+        "z": "dfbb214a.89a8b",
+        "name": "Stube",
+        "bridge": "c33f3c64.a7751",
+        "lightid": "11",
+        "colornamer": true,
+        "x": 910,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "db9b17e4.973688",
+        "type": "ioBroker get",
+        "z": "dfbb214a.89a8b",
+        "name": "Büro Helligkeit",
+        "topic": "mihome.0.devices.gateway_7811dc64e4d4.illumination",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 320,
+        "y": 720,
+        "wires": [
+            [
+                "4b753af5.51aa84"
+            ]
+        ]
+    },
+    {
+        "id": "eaa0ba52.04c8c8",
+        "type": "ioBroker get",
+        "z": "dfbb214a.89a8b",
+        "name": "Door",
+        "topic": "sonoff.0.door_office.POWER2",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 650,
+        "y": 740,
+        "wires": [
+            [
+                "18dcdb72.f93975"
+            ]
+        ]
+    },
+    {
+        "id": "4b753af5.51aa84",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "Helligkeit > 500",
+        "func": "msg.payload = parseInt(msg.payload)\nnode.status({text:msg.payload + ' Lux'});\nif(msg.payload > 500){\n    msg.payload = 0\n    return [msg, null]\n}\nreturn [null, msg]",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 500,
+        "y": 720,
+        "wires": [
+            [
+                "19cc786f.736998"
+            ],
+            [
+                "eaa0ba52.04c8c8"
+            ]
+        ]
+    },
+    {
+        "id": "18dcdb72.f93975",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "func": "msg.payload = msg.payload === 'true'\nif(msg.payload){\n    msg.payload = 1\n}else{\n    msg.payload = 0\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 770,
+        "y": 740,
+        "wires": [
+            [
+                "19cc786f.736998"
+            ]
+        ]
+    },
+    {
+        "id": "21b7c2e5.1a5d9e",
+        "type": "ioBroker in",
+        "z": "dfbb214a.89a8b",
+        "name": "Büro Helligkeit",
+        "topic": "mihome.0.devices.gateway_7811dc64e4d4.illumination",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "357e3618.f4e82a"
+            ]
+        ]
+    },
+    {
+        "id": "357e3618.f4e82a",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "Helligkeit",
+        "func": "msg.payload = parseInt(msg.payload)\nnode.status({text:msg.payload + ' lux'});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "488324b9.4d312c",
+                "1e3372c8.7e899d"
+            ]
+        ]
+    },
+    {
+        "id": "488324b9.4d312c",
+        "type": "ui_chart",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "group": "47d99fbc.6877",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "label": "Helligkeit",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 600,
+        "y": 140,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1e3372c8.7e899d",
+        "type": "ui_text",
+        "z": "dfbb214a.89a8b",
+        "group": "47d99fbc.6877",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Helligkeit",
+        "format": "{{msg.payload}} LUX",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c5dce8d0.c87108",
+        "type": "ioBroker in",
+        "z": "dfbb214a.89a8b",
+        "name": "Temperatur",
+        "topic": "sonoff.0.door_office.AM2301_Temperature",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 130,
+        "y": 960,
+        "wires": [
+            [
+                "8ab169e9.53af48"
+            ]
+        ]
+    },
+    {
+        "id": "8ab169e9.53af48",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "func": "msg.temp = msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 960,
+        "wires": [
+            [
+                "52dbb63c.194568"
+            ]
+        ]
+    },
+    {
+        "id": "52dbb63c.194568",
+        "type": "ioBroker get",
+        "z": "dfbb214a.89a8b",
+        "name": "Luftfeuchtigkeit",
+        "topic": "sonoff.0.door_office.AM2301_Humidity",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 420,
+        "y": 960,
+        "wires": [
+            [
+                "ae34e0da.203db"
+            ]
+        ]
+    },
+    {
+        "id": "6d36596b.4c9ed8",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "func": "text =  \"[z][s2l1c1]Temp:\" + msg.temp + \"C\"\ntext += \"[s2l3c1]Hum: \" + msg.hum + \"%\" \ntext += \"[s1l8c1]LUX:\" + msg.lux + \" / \"\ntext += \"Door:\" + msg.payload\n\nmsg.payload = text\n// [z][s2l1c1]Temp: 25.3C [s2l3c1]Hum:  48.3%\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1070,
+        "y": 960,
+        "wires": [
+            [
+                "7ca22e87.231a4"
+            ]
+        ]
+    },
+    {
+        "id": "7ca22e87.231a4",
+        "type": "ioBroker out",
+        "z": "dfbb214a.89a8b",
+        "name": "DisplayText",
+        "topic": "sonoff.0.door_office.DisplayText",
+        "ack": "false",
+        "autoCreate": "false",
+        "x": 1270,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "1f3e2df6.7b25d2",
+        "type": "comment",
+        "z": "dfbb214a.89a8b",
+        "name": "Set Display Door_Office",
+        "info": "",
+        "x": 160,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "ad30160c.e6a838",
+        "type": "comment",
+        "z": "dfbb214a.89a8b",
+        "name": "Door_Office - Sensor Logic",
+        "info": "If door opens, light goes on \nif ilumination is less than 500 LUX\n\nIf door closes, light goes off",
+        "x": 170,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "ae48a632.a92098",
+        "type": "ioBroker get",
+        "z": "dfbb214a.89a8b",
+        "name": "Helligkeit",
+        "topic": "mihome.0.devices.gateway_7811dc64e4d4.illumination",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 700,
+        "y": 960,
+        "wires": [
+            [
+                "40b8b348.bf235c"
+            ]
+        ]
+    },
+    {
+        "id": "ae34e0da.203db",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "func": "msg.hum = msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 960,
+        "wires": [
+            [
+                "ae48a632.a92098"
+            ]
+        ]
+    },
+    {
+        "id": "6dba2865.80b9e8",
+        "type": "ioBroker get",
+        "z": "dfbb214a.89a8b",
+        "name": "Door",
+        "topic": "sonoff.0.door_office.POWER2",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 950,
+        "y": 960,
+        "wires": [
+            [
+                "6d36596b.4c9ed8"
+            ]
+        ]
+    },
+    {
+        "id": "40b8b348.bf235c",
+        "type": "function",
+        "z": "dfbb214a.89a8b",
+        "name": "",
+        "func": "msg.lux = msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 830,
+        "y": 960,
+        "wires": [
+            [
+                "6dba2865.80b9e8"
+            ]
+        ]
+    },
+    {
+        "id": "47d99fbc.6877",
+        "type": "ui_group",
+        "z": "",
+        "name": "Sensor",
+        "tab": "efe439b5.8aa778",
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "c33f3c64.a7751",
+        "type": "hue-bridge",
+        "z": "",
+        "name": "Hue Bridge",
+        "bridge": "192.168.86.170",
+        "key": "GhdAX9MoqqrCVuWeW-0vBN2dgjjBBxEZOX61RXOF",
+        "interval": "3000"
+    },
+    {
+        "id": "efe439b5.8aa778",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Büro",
+        "icon": "group"
+    }
+]
