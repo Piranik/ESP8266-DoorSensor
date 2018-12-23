@@ -49,6 +49,11 @@ Clean Display:
 ```
 DisplayText [z]
 ```
+Display Power on/off:
+```
+Power ON
+Power OFF
+```
 ## Configure the Switch (Reed Sensor)
 ```
 CMD: SwitchMode2 1
@@ -57,3 +62,5 @@ MQT: stat/door_office/RESULT = {"SwitchMode2":1}
 CMD: SwitchTopic 1
 MQT: stat/door_office/RESULT = {"SwitchTopic":"door_office"}
 ```
+## Adaption on iobroker
+- Change DisplayText to String (Zahl zu Zeichenkette)
