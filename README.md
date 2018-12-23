@@ -6,7 +6,7 @@ The os in the esp8266 is Tasmota.
 
 
 ## Schema
-![Image of Fritzing](https://github.com/swissglider/ESP8266-DoorSensor/blob/master/fritzing/ESP8266-DoorSensor.png?raw=true)
+![Image of Fritzing](https://github.com/swissglider/ESP8266-DoorSensor/blob/master/fritzing/ESP8266-DoorSensor1.png?raw=true)
 
 ## Configuration on Tasmota:
 ![Image of Tasmota](https://github.com/swissglider/ESP8266-DoorSensor/blob/master/picture/Office-Door_Configuration.png?raw=true)
